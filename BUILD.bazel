@@ -1,0 +1,27 @@
+load("@rules_cc//cc:defs.bzl", "cc_binary")
+
+platform(
+    name = "x64_windows-clang-cl",
+    constraint_values = [
+        "@platforms//cpu:x86_64",
+        "@platforms//os:windows",
+        "@bazel_tools//tools/cpp:clang-cl",
+    ],
+)
+
+cc_binary(
+    name = "test-generator",
+    srcs = ["test-generator.cc"],
+)
+
+genrule(
+    name = "test-cc",
+    outs = ["test.cc"],
+    tools = [":test-generator"],
+    cmd = "$(location :test-generator) $@",
+)
+
+cc_binary(
+    name = "test",
+    srcs = ["test.cc"],
+)

@@ -1,0 +1,2 @@
+build:clang-cl --compiler=clang-cl
+build:cc_toolchain_resolution --incompatible_enable_cc_toolchain_resolution --extra_toolchains=@local_config_cc//:cc-toolchain-x64_windows-clang-cl --extra_execution_platforms=//:x64_windows-clang-cl
